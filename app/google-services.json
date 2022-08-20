@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "792481851330",
+    "project_id": "nl-app-7644f",
+    "storage_bucket": "nl-app-7644f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792481851330:android:192874e55f0214b1b8d85b",
+        "android_client_info": {
+          "package_name": "com.example.nlapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "792481851330-1i01cal0ef7orimkmamod0dhel31uurk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7MHk5CuTxAp9Tx8_D8OyBp-ZNxFdBLSo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "792481851330-1i01cal0ef7orimkmamod0dhel31uurk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
