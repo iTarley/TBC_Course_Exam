@@ -30,6 +30,10 @@ class LoginFragment : Fragment() {
 //        val activity = requireActivity() as? MainActivity
 //        activity?.hideNavBar()
 
+        //test
+        binding.loginBtn.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCryptoFragment())
+        }
 
         binding.registerBtn.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
