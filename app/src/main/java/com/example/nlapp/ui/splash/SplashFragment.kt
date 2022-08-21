@@ -1,4 +1,4 @@
-package com.example.nlapp.fragments
+package com.example.nlapp.ui.splash
 
 import android.os.Bundle
 import android.os.Handler
@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.nlapp.MainActivity
 import com.example.nlapp.R
 
 
@@ -26,6 +27,14 @@ class SplashFragment : Fragment() {
 
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+//        val activity = requireActivity() as? MainActivity
+//        activity?.hideNavBar()
+
     }
 
 }

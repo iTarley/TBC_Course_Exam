@@ -1,4 +1,4 @@
-package com.example.nlapp.fragments
+package com.example.nlapp.ui.crypto
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,22 +6,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import com.example.nlapp.MainActivity
 import com.example.nlapp.R
-import com.example.nlapp.viewModel.LoginViewModel
 
-class LoginFragment : Fragment() {
+class CryptoFragment : Fragment() {
 
-    private val viewModel: LoginViewModel by viewModels()
+    companion object {
+        fun newInstance() = CryptoFragment()
+    }
+
+    private lateinit var viewModel: CryptoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        return inflater.inflate(R.layout.crypto_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val activity = requireActivity() as? MainActivity
+        activity?.showNavBar()
     }
+
 }

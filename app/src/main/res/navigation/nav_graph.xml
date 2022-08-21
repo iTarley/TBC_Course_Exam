@@ -7,18 +7,38 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.nlapp.fragments.SplashFragment"
+        android:name="com.example.nlapp.ui.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:enterAnim="@anim/from_bottom"
-            app:popUpTo="@id/nav_graph" />
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.nlapp.fragments.LoginFragment"
+        android:name="com.example.nlapp.ui.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_cryptoFragment"
+            app:destination="@id/cryptoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cryptoFragment"
+        android:name="com.example.nlapp.ui.crypto.CryptoFragment"
+        android:label="crypto_fragment"
+        tools:layout="@layout/crypto_fragment" />
+    <fragment
+        android:id="@+id/exchangeFragment"
+        android:name="com.example.nlapp.ui.exchange.ExchangeFragment"
+        android:label="exchange_fragment"
+        tools:layout="@layout/exchange_fragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.nlapp.ui.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" />
 </navigation>
