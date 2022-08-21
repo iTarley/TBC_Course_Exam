@@ -32,16 +32,12 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val activity = requireActivity() as? MainActivity
-//        activity?.hideNavBar()
 
-        //test
         binding.loginBtn.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCryptoFragment())
         }
 
         listeners()
-//        checkUser()
 
 
 
@@ -93,11 +89,6 @@ class LoginFragment : Fragment() {
 
     }
 
-//    private fun checkUser(){
-//        if(FirebaseAuth.getInstance().currentUser !=null){
-//            navigate()
-//        }
-//    }
 
     private fun authentication(email: String, password: String) {
         FirebaseAuth
