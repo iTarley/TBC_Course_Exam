@@ -19,9 +19,19 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.nlapp.ui.login.LoginFragment"
+        android:name="com.example.nlapp.ui.authentication.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/open_anim"
+            app:popEnterAnim="@anim/back_anim" />
+        <action
+            android:id="@+id/action_loginFragment_to_recoveryFragment"
+            app:destination="@id/recoveryFragment"
+            app:enterAnim="@anim/open_anim"
+            app:popEnterAnim="@anim/back_anim" />
         <action
             android:id="@+id/action_loginFragment_to_cryptoFragment"
             app:destination="@id/cryptoFragment" />
@@ -41,4 +51,14 @@
         android:name="com.example.nlapp.ui.profile.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.nlapp.ui.authentication.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/recoveryFragment"
+        android:name="com.example.nlapp.ui.authentication.passwordRecovery.RecoveryFragment"
+        android:label="fragment_recovery"
+        tools:layout="@layout/fragment_recovery" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.nlapp.ui.login
+package com.example.nlapp.ui.authentication.login
 
 import androidx.lifecycle.ViewModel
 

@@ -2,4 +2,13 @@
     <string name="app_name">NL App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email">Email</string>
+    <string name="log_in">Log In</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="register">Register</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="send_mail">Send Mail</string>
 </resources>

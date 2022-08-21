@@ -23,7 +23,7 @@ class SplashFragment : Fragment() {
 
         Handler(Looper.myLooper()!!).postDelayed({
             findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToLoginFragment())
-        },3000)
+        },1000)
 
 
         return view
