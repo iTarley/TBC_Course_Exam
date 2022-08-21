@@ -1,4 +1,4 @@
-package com.example.nlapp.models
+package com.example.nlapp.model
 
 data class User(
     val name:String,

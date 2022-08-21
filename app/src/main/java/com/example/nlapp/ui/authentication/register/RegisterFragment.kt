@@ -10,7 +10,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.nlapp.R
 import com.example.nlapp.databinding.FragmentRegisterBinding
-import com.example.nlapp.models.User
+import com.example.nlapp.model.User
 import com.example.nlapp.utils.Validator.isEmailEmpty
 import com.example.nlapp.utils.Validator.isEmailValid
 import com.example.nlapp.utils.Validator.isNameEmpty
@@ -126,9 +126,6 @@ class RegisterFragment : Fragment() {
         db.child(auth.currentUser?.uid!!)
             .setValue(userInfo)
     }
-
-
-
 
 
     override fun onDestroyView() {

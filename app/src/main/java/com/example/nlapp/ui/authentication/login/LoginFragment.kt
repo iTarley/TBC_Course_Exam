@@ -13,7 +13,6 @@ import com.example.nlapp.databinding.FragmentLoginBinding
 import com.example.nlapp.utils.Validator.isEmailEmpty
 import com.example.nlapp.utils.Validator.isEmailValid
 import com.example.nlapp.utils.Validator.isPasswordEmpty
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment() {
@@ -37,8 +36,14 @@ class LoginFragment : Fragment() {
 //        val activity = requireActivity() as? MainActivity
 //        activity?.hideNavBar()
 
+        //test
+        binding.loginBtn.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCryptoFragment())
+        }
+
         listeners()
 //        checkUser()
+
 
 
 
