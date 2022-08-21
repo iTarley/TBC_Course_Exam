@@ -34,9 +34,7 @@
             app:popEnterAnim="@anim/back_anim" />
         <action
             android:id="@+id/action_loginFragment_to_cryptoFragment"
-            app:destination="@id/cryptoFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/cryptoFragment" />
     </fragment>
     <fragment
         android:id="@+id/cryptoFragment"

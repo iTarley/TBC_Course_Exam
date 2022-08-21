@@ -11,4 +11,13 @@
     <string name="repeat_password">Repeat Password</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="send_mail">Send Mail</string>
+    <string name="enter_your_email">Enter your Email</string>
+    <string name="enter_correct_password">Enter correct password</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_your_last_name">Enter your last name</string>
+    <string name="not_match">Password doesn\'t match</string>
+    <string name="success_reg">Successful registration</string>
+    <string name="error_reg">Registration failed</string>
+    <string name="welcome">Welcome</string>
+    <string name="short_password">Password is too short</string>
 </resources>
