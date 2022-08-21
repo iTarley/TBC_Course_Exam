@@ -57,7 +57,8 @@ class CryptoFragment : Fragment() {
                 viewModel.cryptoDataFlow.collect {
                     when (it) {
                         is ResponseHandler.Success -> {
-                            it.data?.let { data -> cryptoAdapter.setData(data) }
+                            it.data?.let { data -> cryptoAdapter.setData(data.sortedBy { it.marketCapRank }) }
+                            binding.progressBar.visibility = View.INVISIBLE
                         }
 
                         is ResponseHandler.Failure -> {

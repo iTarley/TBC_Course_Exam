@@ -38,7 +38,7 @@ class CryptoAdapter :
             binding.apply {
                 ivCryptoImage.setImage(currentItem.image)
                 tvCryptoName.text = currentItem.name
-                tvCryptoPrice.text = currentItem.currentPrice.toString()
+                tvCryptoPrice.text = currentItem.currentPrice.toString() + "$"
                 tvCryptoSymbol.text = currentItem.symbol
             }
         }
