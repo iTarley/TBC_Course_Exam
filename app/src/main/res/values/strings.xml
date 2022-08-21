@@ -28,4 +28,11 @@
     <string name="check_email">Check Your Email</string>
     <string name="open">Open</string>
     <string name="url">https://www.youtube.com/watch?v=dQw4w9WgXcQ</string>
+    <string name="currency_nexchange">Currency \nExchange</string>
+    <string name="currency">Currency</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="amount">Amount</string>
+    <string name="result">Result</string>
+    <string name="confirm">Confirm</string>
 </resources>
