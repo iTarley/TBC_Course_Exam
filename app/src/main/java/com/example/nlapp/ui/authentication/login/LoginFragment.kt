@@ -1,4 +1,4 @@
-package com.example.nlapp.ui.login
+package com.example.nlapp.ui.authentication.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.nlapp.MainActivity
-import com.example.nlapp.R
 import com.example.nlapp.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
@@ -32,10 +30,20 @@ class LoginFragment : Fragment() {
 //        val activity = requireActivity() as? MainActivity
 //        activity?.hideNavBar()
 
-        binding.test.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCryptoFragment())
+
+        binding.registerBtn.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+        }
+
+        binding.forgetPassText.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRecoveryFragment())
         }
 
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
