@@ -78,7 +78,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/registerBtn"
+        android:id="@+id/sendMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
