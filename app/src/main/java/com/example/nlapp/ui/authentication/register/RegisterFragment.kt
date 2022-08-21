@@ -22,7 +22,6 @@ import com.google.firebase.database.FirebaseDatabase
 
 class RegisterFragment : Fragment() {
 
-    private val viewModel: RegisterViewModel by viewModels()
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
@@ -53,7 +52,6 @@ class RegisterFragment : Fragment() {
     }
 
 
-    //თუ გაქვს იდეა როგორ გავალამაზოთ ფუნქცია, მითხარი
     private fun registration() {
         binding.apply {
             val email = emailEditText.text.toString()

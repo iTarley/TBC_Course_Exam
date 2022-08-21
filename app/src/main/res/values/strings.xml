@@ -20,4 +20,12 @@
     <string name="error_reg">Registration failed</string>
     <string name="welcome">Welcome</string>
     <string name="short_password">Password is too short</string>
+    <string name="log_out">Log Out</string>
+    <string name="sure">Are you sure ?</string>
+    <string name="decline">Decline</string>
+    <string name="accept">Accept</string>
+    <string name="doent_exits">This email doesn\'t exist</string>
+    <string name="check_email">Check Your Email</string>
+    <string name="open">Open</string>
+    <string name="url">https://www.youtube.com/watch?v=dQw4w9WgXcQ</string>
 </resources>
