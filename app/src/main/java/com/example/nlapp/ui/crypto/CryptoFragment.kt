@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nlapp.MainActivity
 import com.example.nlapp.R
@@ -78,6 +79,13 @@ class CryptoFragment : Fragment() {
         binding.cryptoRecycler.layoutManager = LinearLayoutManager(context)
         binding.cryptoRecycler.adapter = cryptoAdapter
         cryptoAdapter.submitList(emptyList())
-    }
 
+        cryptoAdapter.clickCryptoItem = {
+            findNavController().navigate(
+                CryptoFragmentDirections.actionCryptoFragmentToCryptoItemFragment(
+                    cryptoItem = it
+                )
+            )
+        }
+    }
 }

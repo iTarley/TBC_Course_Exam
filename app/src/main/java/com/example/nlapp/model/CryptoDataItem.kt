@@ -1,10 +1,12 @@
 package com.example.nlapp.model
 
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
-@JsonClass(generateAdapter = true)
+@Parcelize
 data class CryptoDataItem(
     @Json(name = "ath")
     val ath: Double,
@@ -56,4 +58,4 @@ data class CryptoDataItem(
     val totalSupply: Double?,
     @Json(name = "total_volume")
     val totalVolume: Long
-)
+):Parcelable
