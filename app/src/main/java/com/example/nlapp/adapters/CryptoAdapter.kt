@@ -13,6 +13,7 @@ class CryptoAdapter :
     ListAdapter<CryptoDataItem, CryptoAdapter.CryptoViewHolder>(CryptoDiffCallBack()) {
 
     private var content = listOf<CryptoDataItem>()
+    var clickCryptoItem: ((CryptoDataItem) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CryptoViewHolder {
         return CryptoViewHolder(
@@ -40,11 +41,14 @@ class CryptoAdapter :
                 tvCryptoName.text = currentItem.name
                 tvCryptoPrice.text = currentItem.currentPrice.toString() + "$"
                 tvCryptoSymbol.text = currentItem.symbol
+                root.setOnClickListener {
+                    clickCryptoItem?.invoke(content[adapterPosition])
+                }
             }
         }
     }
 
-    fun setData(newList: List<CryptoDataItem>){
+    fun setData(newList: List<CryptoDataItem>) {
         content = newList
         submitList(content)
     }

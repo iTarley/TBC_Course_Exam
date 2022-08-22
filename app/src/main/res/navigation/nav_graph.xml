@@ -42,7 +42,11 @@
         android:id="@+id/cryptoFragment"
         android:name="com.example.nlapp.ui.crypto.CryptoFragment"
         android:label="crypto_fragment"
-        tools:layout="@layout/crypto_fragment" />
+        tools:layout="@layout/crypto_fragment" >
+        <action
+            android:id="@+id/action_cryptoFragment_to_cryptoItemFragment"
+            app:destination="@id/cryptoItemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/exchangeFragment"
         android:name="com.example.nlapp.ui.exchange.ExchangeFragment"
@@ -74,4 +78,17 @@
         android:name="com.example.nlapp.ui.authentication.passwordRecovery.RecoveryFragment"
         android:label="fragment_recovery"
         tools:layout="@layout/fragment_recovery" />
+    <fragment
+        android:id="@+id/cryptoItemFragment"
+        android:name="com.example.nlapp.ui.cryptoitem.CryptoItemFragment"
+        android:label="crypto_item_fragment"
+        tools:layout="@layout/crypto_item_fragment" >
+        <action
+            android:id="@+id/action_cryptoItemFragment_to_cryptoFragment"
+            app:destination="@id/cryptoFragment"
+            app:popUpTo="@id/cryptoFragment" />
+        <argument
+            android:name="cryptoItem"
+            app:argType="com.example.nlapp.model.CryptoDataItem" />
+    </fragment>
 </navigation>
