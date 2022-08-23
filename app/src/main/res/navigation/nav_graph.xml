@@ -45,7 +45,9 @@
         tools:layout="@layout/crypto_fragment" >
         <action
             android:id="@+id/action_cryptoFragment_to_cryptoItemFragment"
-            app:destination="@id/cryptoItemFragment" />
+            app:destination="@id/cryptoItemFragment"
+            app:enterAnim="@anim/open_anim"
+            app:popEnterAnim="@anim/back_anim" />
     </fragment>
     <fragment
         android:id="@+id/exchangeFragment"

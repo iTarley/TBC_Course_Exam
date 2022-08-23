@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.nlapp.MainActivity
@@ -44,7 +45,7 @@ class CryptoItemFragment : Fragment() {
             checkFavorite()
         }
         binding.vBack.setOnClickListener {
-            findNavController().navigate(CryptoItemFragmentDirections.actionCryptoItemFragmentToCryptoFragment())
+            Navigation.findNavController(it).popBackStack()
         }
     }
 
@@ -61,8 +62,7 @@ class CryptoItemFragment : Fragment() {
                 "${tvCryptoLastUpdate.text}" + args.cryptoItem.lastUpdated.substring(0, 10)
             tvCryptoRank.text = "${tvCryptoRank.text}" + args.cryptoItem.marketCapRank.toString()
             tvCryptoPriceChange.text =
-                "${tvCryptoPriceChange.text}" + args.cryptoItem.priceChange24h.toString()
-                    .substring(0, 6) + "$"
+                "${tvCryptoPriceChange.text}" + args.cryptoItem.priceChange24h.toString() + "$"
         }
     }
 
