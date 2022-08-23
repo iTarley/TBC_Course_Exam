@@ -15,7 +15,7 @@ interface ApiInterface {
     @Headers("apikey: 1M9y5FMfI29t45QkVaeQ0hsEovmqZEXJ")
     @GET("v1/exchange-rates/nbg/convert")
     suspend fun getExchangeData(
-        @Query("amount") Amount: Int,
+        @Query("amount") Amount: Long,
         @Query("from") From: String,
         @Query("to") To: String
     ): Response<CurrencyRate>
