@@ -35,4 +35,6 @@
     <string name="amount">Amount</string>
     <string name="result">Result</string>
     <string name="confirm">Confirm</string>
+    <string name="usd">USD</string>
+    <string name="resultExchange"> %1$s  %2$s</string>
 </resources>

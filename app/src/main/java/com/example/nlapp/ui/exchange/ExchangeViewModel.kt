@@ -14,7 +14,7 @@ class ExchangeViewModel : ViewModel() {
     private var _exchangeFlow = MutableStateFlow<ResponseHandler<CurrencyRate>>(ResponseHandler.Loading())
     val exchangeFlow = _exchangeFlow.asStateFlow()
 
-    fun getCurrency(amount:Int,from:String,to:String){
+    fun getCurrency(amount: Long, from:String, to:String){
         viewModelScope.launch {
             val response = RetrofitClient.getCurrencyInfo.getExchangeData(amount,from,to)
             if (response.isSuccessful){
