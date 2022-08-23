@@ -35,6 +35,7 @@
         <action
             android:id="@+id/action_loginFragment_to_cryptoFragment"
             app:destination="@id/cryptoFragment"
+            app:enterAnim="@anim/open_anim"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
     </fragment>
@@ -62,7 +63,8 @@
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:enterAnim="@anim/back_anim"
+            app:enterAnim="@anim/from_top"
+            app:popEnterAnim="@anim/from_top"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
     </fragment>
