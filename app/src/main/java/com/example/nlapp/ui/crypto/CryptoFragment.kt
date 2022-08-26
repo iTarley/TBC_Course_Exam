@@ -2,6 +2,8 @@ package com.example.nlapp.ui.crypto
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,10 +19,12 @@ import com.example.nlapp.MainActivity
 import com.example.nlapp.R
 import com.example.nlapp.adapters.CryptoAdapter
 import com.example.nlapp.databinding.CryptoFragmentBinding
+import com.example.nlapp.model.CryptoDataItem
 import com.example.nlapp.utils.ResponseHandler
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import retrofit2.Response.error
+import java.util.Locale.filter
 
 class CryptoFragment : Fragment() {
 
@@ -50,6 +54,7 @@ class CryptoFragment : Fragment() {
         setUpRecycler()
         viewModel.getCryptoData()
         observer()
+        filterInit()
     }
 
     private fun observer() {
@@ -88,4 +93,50 @@ class CryptoFragment : Fragment() {
             )
         }
     }
+
+    private fun filterInit(){
+        binding.searchEditText.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                filter(p0.toString())
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+        })
+    }
+
+    private fun filter(text:String){
+
+        val filteredCrypto = ArrayList<CryptoDataItem>()
+
+        viewLifecycleOwner.lifecycleScope.launch{
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.cryptoDataFlow.collect{
+                    when(it){
+                        is ResponseHandler.Failure -> {
+                            Toast.makeText(context, "${it.errorMessage}", Toast.LENGTH_SHORT).show()
+                        }
+                        is ResponseHandler.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                        }
+                        is ResponseHandler.Success -> {
+                            it.data?.filterTo(filteredCrypto){item->
+                                item.name.lowercase().contains(text.lowercase())
+                            }
+                            cryptoAdapter.filterList(filteredCrypto)
+                            binding.progressBar.visibility = View.INVISIBLE
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+    }
+
+
 }
