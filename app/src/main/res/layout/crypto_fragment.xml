@@ -8,30 +8,45 @@
     tools:context=".ui.crypto.CryptoFragment">
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="25dp"
-        android:orientation="vertical"
-        android:weightSum="2">
+        android:fontFamily="@font/bpg_nino_mtavruli_normal"
+        android:text="@string/coin_list"
+        android:textColor="@color/black"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="64dp"
+        android:textSize="30sp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:hint="@string/search"
+        android:layout_gravity="center"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/ic_search"
+        app:endIconTint="@color/black"
+        app:startIconTint="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Top 50 Crypto"
-            android:textColor="@color/black"
-            android:textSize="25sp" />
+            android:background="@drawable/text_box"
+            android:fontFamily="@font/bpg_nino_mtavruli_normal"
+            android:inputType="text"
+            android:paddingTop="23dp"
+            android:singleLine="true"
+            android:textSize="22sp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Currency"
-            android:textColor="@color/black"
-            android:textSize="25sp" />
-
-    </LinearLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -44,7 +59,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cryptoRecycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         tools:itemCount="5"

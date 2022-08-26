@@ -37,4 +37,6 @@
     <string name="confirm">Confirm</string>
     <string name="usd">USD</string>
     <string name="resultExchange"> %1$s  %2$s</string>
+    <string name="search">Search</string>
+    <string name="coin_list">Coin List</string>
 </resources>

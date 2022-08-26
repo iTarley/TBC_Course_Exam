@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nlapp.databinding.CryptoItemBinding
 import com.example.nlapp.extensions.setImage
 import com.example.nlapp.model.CryptoDataItem
+import com.example.nlapp.model.CurrencyRate
 
 class CryptoAdapter :
     ListAdapter<CryptoDataItem, CryptoAdapter.CryptoViewHolder>(CryptoDiffCallBack()) {
@@ -32,9 +33,11 @@ class CryptoAdapter :
 
     inner class CryptoViewHolder(private val binding: CryptoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        private lateinit var currentItem :CryptoDataItem
         fun onBind() {
 
-            val currentItem: CryptoDataItem = content[adapterPosition]
+            currentItem = getItem(adapterPosition)
 
             binding.apply {
                 ivCryptoImage.setImage(currentItem.image)
@@ -42,7 +45,7 @@ class CryptoAdapter :
                 tvCryptoPrice.text = currentItem.currentPrice.toString() + "$"
                 tvCryptoSymbol.text = currentItem.symbol
                 root.setOnClickListener {
-                    clickCryptoItem?.invoke(content[adapterPosition])
+                    clickCryptoItem?.invoke(getItem(adapterPosition))
                 }
             }
         }
@@ -51,6 +54,10 @@ class CryptoAdapter :
     fun setData(newList: List<CryptoDataItem>) {
         content = newList
         submitList(content)
+    }
+    fun filterList(filteredHeroes: List<CryptoDataItem>) {
+        val search:List<CryptoDataItem> = filteredHeroes
+        submitList(search)
     }
 
     class CryptoDiffCallBack : DiffUtil.ItemCallback<CryptoDataItem>() {
