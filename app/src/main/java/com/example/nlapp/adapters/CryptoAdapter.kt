@@ -36,6 +36,7 @@ class CryptoAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         private lateinit var currentItem :CryptoDataItem
+
         @SuppressLint("SetTextI18n")
         fun onBind() {
 

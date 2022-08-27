@@ -93,7 +93,7 @@ class CryptoFragment : BaseFragment<CryptoFragmentBinding>(CryptoFragmentBinding
 
     private fun filter(text: String) {
 
-        val filteredCrypto = listOf<CryptoDataItem>()
+        val filteredCrypto = arrayListOf<CryptoDataItem>()
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -106,7 +106,7 @@ class CryptoFragment : BaseFragment<CryptoFragmentBinding>(CryptoFragmentBinding
                             binding.progressBar.visibility = View.VISIBLE
                         }
                         is ResponseHandler.Success -> {
-                            it.data?.filterTo(filteredCrypto as ArrayList) { item ->
+                            it.data?.filterTo(filteredCrypto) { item ->
                                 item.name.lowercase().contains(text.lowercase())
                             }
                             cryptoAdapter.filterList(filteredCrypto)

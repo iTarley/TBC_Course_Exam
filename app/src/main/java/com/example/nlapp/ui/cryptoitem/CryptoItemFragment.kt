@@ -1,16 +1,9 @@
 package com.example.nlapp.ui.cryptoitem
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.nlapp.MainActivity
-import com.example.nlapp.R
 import com.example.nlapp.databinding.CryptoItemFragmentBinding
 import com.example.nlapp.extensions.setImage
 import com.example.nlapp.ui.base.BaseFragment
@@ -26,13 +19,16 @@ class CryptoItemFragment :
         val activity = requireActivity() as? MainActivity
         activity?.hideNavBar()
         setCryptoItemData()
-
         listeners()
+        addToFavorites()
     }
 
     private fun listeners() {
         binding.vBack.setOnClickListener {
             Navigation.findNavController(it).popBackStack()
+        }
+        binding.btnAddToFavorite.setOnClickListener {
+            addToFavorites()
         }
     }
 
@@ -52,5 +48,13 @@ class CryptoItemFragment :
                 "${tvCryptoPriceChange.text}" + args.cryptoItem.priceChange24h.toString()
                     .substring(0, 7) + "$"
         }
+    }
+
+    private fun addToFavorites() {
+        val auth = FirebaseAuth.getInstance()
+        val db = FirebaseDatabase.getInstance().getReference("User")
+
+        db.child(auth.currentUser?.uid!!).child("Favorite").child(args.cryptoItem.name)
+            .setValue(args.cryptoItem)
     }
 }

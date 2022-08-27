@@ -1,6 +1,7 @@
 package com.example.nlapp.ui.admin
 
 import android.util.Log.d
+import android.util.Log.i
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -29,15 +30,17 @@ class AdminFragment : BaseFragment<AdminFragmentBinding>(AdminFragmentBinding::i
 
 
     override fun start() {
-        setUpRecycler()
+
         listeners()
+        setUpRecycler()
+
     }
 
     private fun setUpRecycler() {
 
+        viewModel.getAdminData()
         binding.rvAdminRecycler.layoutManager = LinearLayoutManager(context)
         binding.rvAdminRecycler.adapter = adminAdapter
-        viewModel.getAdminData()
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.adminFlow.collect {
@@ -49,7 +52,8 @@ class AdminFragment : BaseFragment<AdminFragmentBinding>(AdminFragmentBinding::i
 
     private fun listeners() {
         adminAdapter.adminItemClicked = {
-            viewModel.deleteUser(viewModel.auth.currentUser?.uid!!)
+            it.uid?.let { it1 -> viewModel.deleteUser(it1) }
         }
     }
+
 }

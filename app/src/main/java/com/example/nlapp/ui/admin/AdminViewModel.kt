@@ -14,20 +14,20 @@ import java.util.*
 
 class AdminViewModel : ViewModel() {
 
-    val databaseReference: DatabaseReference =
+    val db: DatabaseReference =
         FirebaseDatabase.getInstance().getReference("User")
 
     val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
 
-    private var _adminFlow = MutableStateFlow<List<User>>(emptyList())
-    var adminFlow = _adminFlow.asStateFlow()
+    private var _adminFlow = MutableSharedFlow<List<User>>()
+    var adminFlow = _adminFlow.asSharedFlow()
 
     private val userList = mutableListOf<User>()
 
     fun getAdminData() {
 
-        databaseReference.addValueEventListener(object : ValueEventListener {
+        db.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 if (snapshot.exists()) {
@@ -35,21 +35,23 @@ class AdminViewModel : ViewModel() {
                         val user = userSnapshot.getValue(User::class.java)
                         userList.add(user!!)
                     }
-
-                    viewModelScope.launch {
-                        _adminFlow.emit(userList)
-                    }
-
+                }
+                viewModelScope.launch {
+                    _adminFlow.emit(userList)
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {
             }
         })
     }
 
-    fun deleteUser(userUID: String) {
-        databaseReference.child(userUID).removeValue()
-        auth.currentUser?.delete()
+    fun deleteUser(uid:String) {
+        viewModelScope.launch {
+
+            db.child(uid).removeValue()
+            auth.currentUser?.delete()
+            _adminFlow.emit(userList)
+        }
+
     }
 }
