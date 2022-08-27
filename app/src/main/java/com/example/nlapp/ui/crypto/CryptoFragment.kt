@@ -3,6 +3,7 @@ package com.example.nlapp.ui.crypto
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +47,7 @@ class CryptoFragment : BaseFragment<CryptoFragmentBinding>(CryptoFragmentBinding
                 viewModel.cryptoDataFlow.collect {
                     when (it) {
                         is ResponseHandler.Success -> {
-                            it.data?.let { data -> cryptoAdapter.setData(data.sortedBy { it.marketCapRank }) }
+                            cryptoAdapter.setData(it.data!!)
                             binding.progressBar.visibility = View.INVISIBLE
                         }
 
@@ -64,10 +65,7 @@ class CryptoFragment : BaseFragment<CryptoFragmentBinding>(CryptoFragmentBinding
     }
 
     private fun setUpRecycler() {
-        binding.cryptoRecycler.layoutManager = LinearLayoutManager(context)
         binding.cryptoRecycler.adapter = cryptoAdapter
-        cryptoAdapter.submitList(emptyList())
-
         cryptoAdapter.clickCryptoItem = {
             findNavController().navigate(
                 CryptoFragmentDirections.actionCryptoFragmentToCryptoItemFragment(
@@ -93,10 +91,12 @@ class CryptoFragment : BaseFragment<CryptoFragmentBinding>(CryptoFragmentBinding
 
     private fun filter(text: String) {
 
-        val filteredCrypto = listOf<CryptoDataItem>()
+        val filteredCrypto = ArrayList<CryptoDataItem>()
+        cryptoAdapter.setData(filteredCrypto)
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+
                 viewModel.cryptoDataFlow.collect {
                     when (it) {
                         is ResponseHandler.Failure -> {
@@ -106,10 +106,9 @@ class CryptoFragment : BaseFragment<CryptoFragmentBinding>(CryptoFragmentBinding
                             binding.progressBar.visibility = View.VISIBLE
                         }
                         is ResponseHandler.Success -> {
-                            it.data?.filterTo(filteredCrypto as ArrayList) { item ->
+                            it.data?.filterTo(filteredCrypto) { item ->
                                 item.name.lowercase().contains(text.lowercase())
                             }
-                            cryptoAdapter.filterList(filteredCrypto)
                             binding.progressBar.visibility = View.INVISIBLE
                         }
                     }

@@ -58,10 +58,6 @@ class CryptoAdapter :
         submitList(content)
     }
 
-    fun filterList(filteredHeroes: List<CryptoDataItem>) {
-        val search:List<CryptoDataItem> = filteredHeroes
-        submitList(search)
-    }
 
     class CryptoDiffCallBack : DiffUtil.ItemCallback<CryptoDataItem>() {
         override fun areItemsTheSame(oldItem: CryptoDataItem, newItem: CryptoDataItem): Boolean {
