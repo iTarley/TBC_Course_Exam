@@ -46,7 +46,7 @@ class AdminAdapter : ListAdapter<User, AdminAdapter.AdminViewHolder>(CryptoDiffC
                 tvLastName.text = "${tvLastName.text} : ${usersList[adapterPosition].lastName}"
                 ivUser.setImage(usersList[adapterPosition].image)
                 root.setOnClickListener {
-                    adminItemClicked?.invoke(usersList[adapterPosition])
+                    adminItemClicked?.invoke(getItem(adapterPosition))
                 }
             }
         }

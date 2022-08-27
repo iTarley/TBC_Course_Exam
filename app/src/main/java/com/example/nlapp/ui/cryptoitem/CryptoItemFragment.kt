@@ -13,26 +13,16 @@ import com.example.nlapp.MainActivity
 import com.example.nlapp.R
 import com.example.nlapp.databinding.CryptoItemFragmentBinding
 import com.example.nlapp.extensions.setImage
+import com.example.nlapp.ui.base.BaseFragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
-class CryptoItemFragment : Fragment() {
-
-    private var _binding: CryptoItemFragmentBinding? = null
-    private val binding get() = _binding!!
+class CryptoItemFragment :
+    BaseFragment<CryptoItemFragmentBinding>(CryptoItemFragmentBinding::inflate) {
 
     private val args: CryptoItemFragmentArgs by navArgs()
 
-    private var favorite = 0
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = CryptoItemFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun start() {
         val activity = requireActivity() as? MainActivity
         activity?.hideNavBar()
         setCryptoItemData()
@@ -41,9 +31,6 @@ class CryptoItemFragment : Fragment() {
     }
 
     private fun listeners() {
-        binding.vFavorite.setOnClickListener {
-            checkFavorite()
-        }
         binding.vBack.setOnClickListener {
             Navigation.findNavController(it).popBackStack()
         }
@@ -62,25 +49,8 @@ class CryptoItemFragment : Fragment() {
                 "${tvCryptoLastUpdate.text}" + args.cryptoItem.lastUpdated.substring(0, 10)
             tvCryptoRank.text = "${tvCryptoRank.text}" + args.cryptoItem.marketCapRank.toString()
             tvCryptoPriceChange.text =
-                "${tvCryptoPriceChange.text}" + args.cryptoItem.priceChange24h.toString() + "$"
-        }
-    }
-
-    private fun addToFavorites() {
-        binding.vFavorite.setBackgroundResource(R.drawable.ic_favorite_true)
-        favorite = 1
-    }
-
-    private fun removeFromFavorites() {
-        binding.vFavorite.setBackgroundResource(R.drawable.ic_favorite_false)
-        favorite = 0
-    }
-
-    private fun checkFavorite() {
-        if (favorite == 0) {
-            addToFavorites()
-        } else {
-            removeFromFavorites()
+                "${tvCryptoPriceChange.text}" + args.cryptoItem.priceChange24h.toString()
+                    .substring(0, 7) + "$"
         }
     }
 }

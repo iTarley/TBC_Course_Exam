@@ -78,7 +78,7 @@ class LoginFragment : Fragment() {
 
             }
             if (!isEmailEmpty(email) && !isPasswordEmpty(password)) {
-//                authentication(email, password)
+                authentication(email, password)
 
             }
         }
@@ -86,18 +86,18 @@ class LoginFragment : Fragment() {
     }
 
 
-//    private fun authentication(email: String, password: String) {
-//        FirebaseAuth
-//            .getInstance()
-//            .signInWithEmailAndPassword(email, password)
-//            .addOnCompleteListener {
-//                if (it.isSuccessful) {
-//                    navigate()
-//                } else {
-//                    binding.emailInputLayout.error = getString(R.string.not_match)
-//                }
-//            }
-//    }
+    private fun authentication(email: String, password: String) {
+        FirebaseAuth
+            .getInstance()
+            .signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    navigate()
+                } else {
+                    binding.emailInputLayout.error = getString(R.string.not_match)
+                }
+            }
+    }
 
 
     private fun navigate() {
