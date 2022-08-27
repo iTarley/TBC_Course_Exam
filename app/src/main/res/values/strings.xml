@@ -39,4 +39,6 @@
     <string name="resultExchange"> %1$s  %2$s</string>
     <string name="search">Search</string>
     <string name="coin_list">Coin List</string>
+    <string name="lastname">lastName</string>
+    <string name="name">name</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.nlapp.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -35,6 +36,7 @@ class CryptoAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         private lateinit var currentItem :CryptoDataItem
+        @SuppressLint("SetTextI18n")
         fun onBind() {
 
             currentItem = getItem(adapterPosition)
@@ -55,6 +57,7 @@ class CryptoAdapter :
         content = newList
         submitList(content)
     }
+
     fun filterList(filteredHeroes: List<CryptoDataItem>) {
         val search:List<CryptoDataItem> = filteredHeroes
         submitList(search)
@@ -68,7 +71,5 @@ class CryptoAdapter :
         override fun areContentsTheSame(oldItem: CryptoDataItem, newItem: CryptoDataItem): Boolean {
             return oldItem == newItem
         }
-
     }
-
 }

@@ -38,6 +38,9 @@
             app:enterAnim="@anim/open_anim"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_adminFragment"
+            app:destination="@id/adminFragment" />
     </fragment>
     <fragment
         android:id="@+id/cryptoFragment"
@@ -94,5 +97,17 @@
         <argument
             android:name="cryptoItem"
             app:argType="com.example.nlapp.model.CryptoDataItem" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="com.example.nlapp.ui.admin.AdminFragment"
+        android:label="admin_fragment"
+        tools:layout="@layout/admin_fragment" >
+        <action
+            android:id="@+id/action_adminFragment_to_splashFragment"
+            app:destination="@id/splashFragment" />
+        <action
+            android:id="@+id/action_adminFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>
