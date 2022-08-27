@@ -18,31 +18,18 @@ import com.example.nlapp.MainActivity
 import com.example.nlapp.adapters.CryptoAdapter
 import com.example.nlapp.databinding.CryptoFragmentBinding
 import com.example.nlapp.model.CryptoDataItem
+import com.example.nlapp.ui.base.BaseFragment
 import com.example.nlapp.utils.ResponseHandler
 import kotlinx.coroutines.launch
 
-class CryptoFragment : Fragment() {
+class CryptoFragment : BaseFragment<CryptoFragmentBinding>(CryptoFragmentBinding::inflate) {
 
     private val viewModel: CryptoViewModel by viewModels()
-
-    private var _binding: CryptoFragmentBinding? = null
-    private val binding get() = _binding!!
-
     private val cryptoAdapter by lazy {
         CryptoAdapter()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = CryptoFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun start() {
         val activity = requireActivity() as? MainActivity
         activity?.showNavBar()
 
@@ -51,6 +38,7 @@ class CryptoFragment : Fragment() {
         observer()
         filterInit()
     }
+
 
     private fun observer() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -89,10 +77,11 @@ class CryptoFragment : Fragment() {
         }
     }
 
-    private fun filterInit(){
-        binding.searchEditText.addTextChangedListener(object :TextWatcher{
+    private fun filterInit() {
+        binding.searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
+
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 filter(p0.toString())
             }
@@ -102,14 +91,14 @@ class CryptoFragment : Fragment() {
         })
     }
 
-    private fun filter(text:String){
+    private fun filter(text: String) {
 
-        val filteredCrypto = ArrayList<CryptoDataItem>()
+        val filteredCrypto = listOf<CryptoDataItem>()
 
-        viewLifecycleOwner.lifecycleScope.launch{
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.cryptoDataFlow.collect{
-                    when(it){
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.cryptoDataFlow.collect {
+                    when (it) {
                         is ResponseHandler.Failure -> {
                             Toast.makeText(context, "${it.errorMessage}", Toast.LENGTH_SHORT).show()
                         }
@@ -117,7 +106,7 @@ class CryptoFragment : Fragment() {
                             binding.progressBar.visibility = View.VISIBLE
                         }
                         is ResponseHandler.Success -> {
-                            it.data?.filterTo(filteredCrypto){item->
+                            it.data?.filterTo(filteredCrypto as ArrayList) { item ->
                                 item.name.lowercase().contains(text.lowercase())
                             }
                             cryptoAdapter.filterList(filteredCrypto)
@@ -127,11 +116,5 @@ class CryptoFragment : Fragment() {
                 }
             }
         }
-
-
-
-
     }
-
-
 }

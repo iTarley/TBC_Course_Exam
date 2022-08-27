@@ -15,27 +15,20 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.nlapp.R
 import com.example.nlapp.databinding.ExchangeFragmentBinding
+import com.example.nlapp.ui.base.BaseFragment
 import com.example.nlapp.utils.ResponseHandler
 import kotlinx.coroutines.launch
 
-class ExchangeFragment : Fragment() {
+class ExchangeFragment : BaseFragment<ExchangeFragmentBinding>(ExchangeFragmentBinding::inflate) {
 
     private val viewModel: ExchangeViewModel by viewModels()
-    private var _binding: ExchangeFragmentBinding? = null
-    private val binding get() = _binding!!
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = ExchangeFragmentBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun start() {
+        setUpExchange()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    private fun setUpExchange() {
 
         val currencyList = listOf("USD", "GEL", "EUR", "GBP")
         val adapter = ArrayAdapter(requireContext(), R.layout.list_popup_window_item, currencyList)
@@ -49,7 +42,7 @@ class ExchangeFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (binding.amountEditText.text.toString().isNotEmpty()) {
                     currExchange()
-                }else {
+                } else {
                     binding.resultInputText.setText("")
                 }
 
@@ -73,20 +66,18 @@ class ExchangeFragment : Fragment() {
                         is ResponseHandler.Failure -> Log.d("error", "${it.errorMessage}")
                         is ResponseHandler.Loading -> binding.progressBar.visibility = View.VISIBLE
                         is ResponseHandler.Success -> {
-                            binding.resultInputText.setText(getString(R.string.resultExchange, it.data?.value.toString(), to))
+                            binding.resultInputText.setText(
+                                getString(
+                                    R.string.resultExchange,
+                                    it.data?.value.toString(),
+                                    to
+                                )
+                            )
                             binding.progressBar.visibility = View.INVISIBLE
                         }
                     }
                 }
             }
         }
-
-
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 }

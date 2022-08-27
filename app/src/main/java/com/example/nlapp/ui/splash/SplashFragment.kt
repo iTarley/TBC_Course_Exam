@@ -28,13 +28,4 @@ class SplashFragment : Fragment() {
 
         return view
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        val activity = requireActivity() as? MainActivity
-//        activity?.hideNavBar()
-
-    }
-
 }
