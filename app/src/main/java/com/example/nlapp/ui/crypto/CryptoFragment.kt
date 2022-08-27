@@ -57,6 +57,7 @@ class CryptoFragment : BaseFragment<CryptoFragmentBinding>(CryptoFragmentBinding
                         is ResponseHandler.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
                         }
+                        else -> {}
                     }
                 }
             }
@@ -112,6 +113,7 @@ class CryptoFragment : BaseFragment<CryptoFragmentBinding>(CryptoFragmentBinding
                             cryptoAdapter.filterList(filteredCrypto)
                             binding.progressBar.visibility = View.INVISIBLE
                         }
+                        else -> {}
                     }
                 }
             }
