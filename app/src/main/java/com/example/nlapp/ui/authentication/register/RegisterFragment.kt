@@ -41,7 +41,7 @@ class RegisterFragment : Fragment() {
 
     }
 
-    private fun listeners(){
+    private fun listeners() {
         binding.backBtn.setOnClickListener {
             Navigation.findNavController(it).popBackStack()
         }
@@ -73,26 +73,26 @@ class RegisterFragment : Fragment() {
             } else {
                 passwordInputLayout.error = null
             }
-            if (isNameEmpty(name,lastName)){
+            if (isNameEmpty(name, lastName)) {
                 nameInputLayout.error = getString(R.string.enter_your_name)
                 lastNameInputLayout.error = getString(R.string.enter_your_last_name)
-            }else{
+            } else {
                 nameInputLayout.error = null
                 lastNameInputLayout.error = null
             }
-            if (!isPasswordMatch(password,passwordRep)){
+            if (!isPasswordMatch(password, passwordRep)) {
                 repeatPasswordInputLayout.error = getString(R.string.not_match)
-            }else{
+            } else {
                 repeatPasswordInputLayout.error = null
             }
 
             if (!isEmailEmpty(email) &&
                 !isPasswordEmpty(password) &&
-                !isNameEmpty(name,lastName) &&
-                isPasswordMatch(password,passwordRep) &&
-                isEmailValid(email))
-            {
-                firebaseAuth(email,password)
+                !isNameEmpty(name, lastName) &&
+                isPasswordMatch(password, passwordRep) &&
+                isEmailValid(email)
+            ) {
+                firebaseAuth(email, password)
             }
         }
 
@@ -101,14 +101,22 @@ class RegisterFragment : Fragment() {
     private fun firebaseAuth(email: String, password: String) {
         FirebaseAuth
             .getInstance()
-            .createUserWithEmailAndPassword(email,password)
+            .createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
-                if (it.isSuccessful){
-                    Snackbar.make(requireView(), getString(R.string.success_reg), Snackbar.LENGTH_LONG).show()
+                if (it.isSuccessful) {
+                    Snackbar.make(
+                        requireView(),
+                        getString(R.string.success_reg),
+                        Snackbar.LENGTH_LONG
+                    ).show()
                     addToDb()
                     findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
-                }else{
-                    Snackbar.make(requireView(), getString(R.string.short_password), Snackbar.LENGTH_LONG).show()
+                } else {
+                    Snackbar.make(
+                        requireView(),
+                        getString(R.string.short_password),
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
             }
     }
@@ -120,7 +128,9 @@ class RegisterFragment : Fragment() {
         val name = binding.nameEditText.text.toString()
         val lastName = binding.lastNameEditText.text.toString()
         val email = binding.emailEditText.text.toString()
-        val userInfo = User(name, lastName,email)
+        val uid = auth.currentUser?.uid!!
+        val image = binding.imageEditText.text.toString()
+        val userInfo = User(name, lastName, email, uid, image)
         db.child(auth.currentUser?.uid!!)
             .setValue(userInfo)
     }

@@ -1,14 +1,13 @@
 package com.example.nlapp.ui.crypto
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,15 +15,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nlapp.MainActivity
-import com.example.nlapp.R
 import com.example.nlapp.adapters.CryptoAdapter
 import com.example.nlapp.databinding.CryptoFragmentBinding
 import com.example.nlapp.model.CryptoDataItem
 import com.example.nlapp.utils.ResponseHandler
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
-import retrofit2.Response.error
-import java.util.Locale.filter
 
 class CryptoFragment : Fragment() {
 
@@ -40,7 +35,7 @@ class CryptoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = CryptoFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }

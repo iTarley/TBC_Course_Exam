@@ -24,7 +24,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -39,13 +39,9 @@ class LoginFragment : Fragment() {
 
         listeners()
 
-
-
-
-
     }
 
-    private fun listeners(){
+    private fun listeners() {
         binding.registerBtn.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
@@ -56,7 +52,9 @@ class LoginFragment : Fragment() {
 
         binding.loginBtn.setOnClickListener {
             login()
-
+            if (binding.emailEditText.text.toString() == "admin@admin" && binding.passwordEditText.text.toString() == "admin") {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToAdminFragment())
+            }
         }
         binding.privacyText.setOnClickListener {
             redirect()
@@ -70,19 +68,17 @@ class LoginFragment : Fragment() {
 
             if (isEmailEmpty(email) || !isEmailValid(email)) {
                 emailInputLayout.error = getString(R.string.enter_your_email)
-            }
-            else {
+            } else {
                 emailInputLayout.error = null
             }
             if (isPasswordEmpty(password)) {
                 passwordInputLayout.error = getString(R.string.enter_correct_password)
-            }
-            else { 
+            } else {
                 passwordInputLayout.error = null
 
             }
             if (!isEmailEmpty(email) && !isPasswordEmpty(password)) {
-                authentication(email, password)
+//                authentication(email, password)
 
             }
         }
@@ -90,20 +86,18 @@ class LoginFragment : Fragment() {
     }
 
 
-    private fun authentication(email: String, password: String) {
-        FirebaseAuth
-            .getInstance()
-            .signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    navigate()
-                }
-
-                else {
-                    binding.emailInputLayout.error = getString(R.string.not_match)
-                }
-            }
-    }
+//    private fun authentication(email: String, password: String) {
+//        FirebaseAuth
+//            .getInstance()
+//            .signInWithEmailAndPassword(email, password)
+//            .addOnCompleteListener {
+//                if (it.isSuccessful) {
+//                    navigate()
+//                } else {
+//                    binding.emailInputLayout.error = getString(R.string.not_match)
+//                }
+//            }
+//    }
 
 
     private fun navigate() {
