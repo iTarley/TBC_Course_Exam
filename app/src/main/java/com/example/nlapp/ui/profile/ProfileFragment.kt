@@ -3,6 +3,7 @@ package com.example.nlapp.ui.profile
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log.d
+import android.util.Log.i
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.example.nlapp.R
 import com.example.nlapp.adapters.CryptoAdapter
 import com.example.nlapp.databinding.ProfileFragmentBinding
 import com.example.nlapp.extensions.setImage
+import com.example.nlapp.model.CryptoDataItem
 import com.example.nlapp.model.User
 import com.example.nlapp.ui.base.BaseFragment
 import com.example.nlapp.utils.FirebaseConnection
@@ -32,13 +34,14 @@ import kotlinx.coroutines.launch
 class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBinding::inflate) {
 
     private val viewModel: ProfileViewModel by viewModels()
+    private val cryptoList = mutableListOf<CryptoDataItem>()
 
     private val profileAdapter by lazy {
         CryptoAdapter()
     }
 
     override fun start() {
-        getUserInfo()
+//        getUserInfo()
         setUpRecycler()
         listeners()
     }
@@ -51,8 +54,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.cryptoFlow.collect {
-                    profileAdapter.setData(it)
-                    d("list","${it.size}")
+                    cryptoList.add(it)
+                    profileAdapter.submitList(cryptoList)
                 }
             }
         }
@@ -94,20 +97,20 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
         findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
     }
 
-    private fun getUserInfo() {
-
-        FirebaseConnection.db.child(FirebaseConnection.auth.currentUser?.uid!!).addValueEventListener(object :
-            ValueEventListener {
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-
-                val userSnapshot = snapshot.getValue(User::class.java)
-
-                binding.ivUserProfile.setImage(userSnapshot?.image)
-
-            }
-            override fun onCancelled(error: DatabaseError) {
-            }
-        })
-    }
+//    private fun getUserInfo() {
+//
+//        FirebaseConnection.db.child(FirebaseConnection.auth.currentUser?.uid!!).addValueEventListener(object :
+//            ValueEventListener {
+//
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//
+//                val userSnapshot = snapshot.getValue(User::class.java)
+//
+////                binding.ivUserProfile.setImage(userSnapshot?.image?: "")
+//
+//            }
+//            override fun onCancelled(error: DatabaseError) {
+//            }
+//        })
+//    }
 }

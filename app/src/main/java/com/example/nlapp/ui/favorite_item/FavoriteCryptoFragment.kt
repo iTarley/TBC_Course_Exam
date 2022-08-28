@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.nlapp.MainActivity
 import com.example.nlapp.databinding.FragmentFavoriteCryptoBinding
 import com.example.nlapp.R
 import com.example.nlapp.extensions.setImage
@@ -23,17 +25,23 @@ class FavoriteCryptoFragment :
     private val args: FavoriteCryptoFragmentArgs by navArgs()
 
     override fun start() {
+        val activity = requireActivity() as? MainActivity
+        activity?.hideNavBar()
         setCryptoItemData()
         listeners()
     }
 
     private fun listeners(){
         binding.vBack.setOnClickListener {
-            Navigation.findNavController(it).popBackStack()
+            findNavController().popBackStack()
+            val activity = requireActivity() as? MainActivity
+            activity?.showNavBar()
         }
         binding.btnRemoveFromFavorite.setOnClickListener {
-            Navigation.findNavController(it).popBackStack()
             removeFromFavorites()
+            findNavController().popBackStack()
+            val activity = requireActivity() as? MainActivity
+            activity?.showNavBar()
         }
     }
 

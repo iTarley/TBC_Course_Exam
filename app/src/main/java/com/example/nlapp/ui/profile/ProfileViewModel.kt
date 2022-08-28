@@ -17,12 +17,9 @@ import kotlinx.coroutines.launch
 class ProfileViewModel : ViewModel() {
 
 
-
-
-    private var _cryptoFlow = MutableSharedFlow<List<CryptoDataItem>>()
+    private var _cryptoFlow = MutableSharedFlow<CryptoDataItem>()
     var cryptoFlow = _cryptoFlow.asSharedFlow()
 
-    private val cryptoList = mutableListOf<CryptoDataItem>()
 
     fun getFavoritesData() {
 
@@ -33,20 +30,16 @@ class ProfileViewModel : ViewModel() {
                     if (snapshot.exists()) {
                         for (cryptoSnapshot in snapshot.children) {
                             val cryptoItem = cryptoSnapshot.getValue(CryptoDataItem::class.java)
-                            cryptoList.add(cryptoItem!!)
-
+                            viewModelScope.launch {
+                                cryptoItem?.let { _cryptoFlow.emit(it) }
+                                d("item","$cryptoItem")
+                            }
                         }
                     }
-
-                    viewModelScope.launch {
-                        _cryptoFlow.emit(cryptoList)
-                    }
-
                 }
 
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
     }
-
 }
