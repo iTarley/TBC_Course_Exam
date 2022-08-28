@@ -8,10 +8,12 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.nlapp.MainActivity
+import com.example.nlapp.R
 import com.example.nlapp.databinding.FragmentFavoriteCryptoBinding
 import com.example.nlapp.extensions.setImage
 import com.example.nlapp.ui.base.BaseFragment
 import com.example.nlapp.utils.FirebaseConnection
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class FavoriteCryptoFragment :
@@ -77,5 +79,10 @@ class FavoriteCryptoFragment :
                 .child("Favorite").child(it)
                 .removeValue()
         }
+        Snackbar.make(
+            requireView(),
+            getString(R.string.removed),
+            Snackbar.LENGTH_SHORT
+        ).show()
     }
 }

@@ -7,6 +7,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nlapp.adapters.AdminAdapter
 import com.example.nlapp.databinding.ActivityMainBinding.bind
@@ -53,6 +55,9 @@ class AdminFragment : BaseFragment<AdminFragmentBinding>(AdminFragmentBinding::i
     private fun listeners() {
         adminAdapter.adminItemClicked = {
             it.uid?.let { it1 -> viewModel.deleteUser(it1) }
+        }
+        binding.tvLogOut.setOnClickListener {
+            Navigation.findNavController(it).popBackStack()
         }
     }
 

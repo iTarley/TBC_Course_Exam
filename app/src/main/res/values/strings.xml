@@ -41,4 +41,13 @@
     <string name="coin_list">Coin List</string>
     <string name="lastname">lastName</string>
     <string name="name">name</string>
+    <string name="lastupdate">LastUpdate:</string>
+    <string name="today_s_pricechange">Today\'s PriceChange:</string>
+    <string name="today_s_low">Today\'s Low:</string>
+    <string name="today_s_high">Today\'s High:</string>
+    <string name="rank">Rank:</string>
+    <string name="current_price">Current price:</string>
+    <string name="add_to_favorites">Add To Favorites</string>
+    <string name="added">Successfully added</string>
+    <string name="removed">Successfully removed</string>
 </resources>
