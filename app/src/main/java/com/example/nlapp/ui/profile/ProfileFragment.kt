@@ -43,7 +43,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
     }
 
     override fun start() {
-        setUpUserInfo()
+        setUpProfile()
         setUpRecycler()
         listeners()
     }
@@ -99,11 +99,13 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
         findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
     }
 
-    private fun setUpUserInfo(){
-        FirebaseConnection.db.child(FirebaseConnection.auth.currentUser?.uid!!).get().addOnSuccessListener {
-            binding.ivUserProfile.setImage(it.getValue(User::class.java)?.image)
-            binding.tvLastName.text = it.getValue(User::class.java)?.lastName.toString()
-            binding.tvName.text = it.getValue(User::class.java)?.name.toString()
+    private fun setUpProfile(){
+        FirebaseConnection.profile.addOnSuccessListener {
+            val profile = it.getValue(User::class.java)
+            binding.ivUserProfile.setImage(profile?.image)
+            binding.tvLastName.text = profile?.lastName.toString()
+            binding.tvName.text = profile?.name.toString()
         }
     }
+
 }
