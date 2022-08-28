@@ -31,6 +31,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.lang.NullPointerException
 
@@ -43,6 +44,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
     }
 
     override fun start() {
+        val activity = requireActivity() as? MainActivity
+        activity?.showNavBar()
         setUpProfile()
         setUpRecycler()
         listeners()
@@ -50,6 +53,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
 
 
     private fun setUpRecycler() {
+
         viewModel.getFavoritesData()
         binding.favoritesRecycler.layoutManager = LinearLayoutManager(context)
         binding.favoritesRecycler.adapter = profileAdapter
@@ -68,7 +72,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
         }
 
         binding.settings.setOnClickListener {
-            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment(binding.tvName.text.toString(),binding.tvLastName.text.toString()))
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
         }
         profileAdapter.clickCryptoItem = {
 

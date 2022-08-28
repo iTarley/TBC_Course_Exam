@@ -131,11 +131,8 @@
         android:name="com.example.nlapp.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
-        <argument
-            android:name="name"
-            app:argType="string" />
-        <argument
-            android:name="lastName"
-            app:argType="string" />
+        <action
+            android:id="@+id/action_settingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>
