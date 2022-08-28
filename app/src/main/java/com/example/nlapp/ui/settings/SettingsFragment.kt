@@ -15,8 +15,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
 
     }
 
-
-
     private fun infoSetup(){
         binding.nameEditText.setText(args.name)
         binding.lastNameEditText.setText(args.lastName)
