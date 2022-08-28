@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.nlapp.MainActivity
+import com.example.nlapp.R
 import com.example.nlapp.databinding.CryptoItemFragmentBinding
 import com.example.nlapp.extensions.setImage
 import com.example.nlapp.ui.base.BaseFragment
 import com.example.nlapp.utils.FirebaseConnection
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -55,5 +57,10 @@ class CryptoItemFragment :
             FirebaseConnection.db.child(FirebaseConnection.auth.currentUser?.uid!!).child("Favorite").child(it)
                 .setValue(args.cryptoItem)
         }
+        Snackbar.make(
+            requireView(),
+            getString(R.string.added),
+            Snackbar.LENGTH_SHORT
+        ).show()
     }
 }

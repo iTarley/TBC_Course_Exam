@@ -20,6 +20,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
 
     override fun start() {
+
+        if(FirebaseAuth.getInstance().currentUser !=null){
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCryptoFragment())
+        }
+
         binding.loginBtn.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCryptoFragment())
         }
