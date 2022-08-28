@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -30,18 +32,18 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.NullPointerException
 
 class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBinding::inflate) {
 
     private val viewModel: ProfileViewModel by viewModels()
-    private val cryptoList = mutableListOf<CryptoDataItem>()
 
     private val profileAdapter by lazy {
         CryptoAdapter()
     }
 
     override fun start() {
-//        getUserInfo()
+        setUpUserInfo()
         setUpRecycler()
         listeners()
     }
@@ -54,8 +56,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.cryptoFlow.collect {
-                    cryptoList.add(it)
-                    profileAdapter.submitList(cryptoList)
+                    profileAdapter.submitList(it.toList())
                 }
             }
         }
@@ -66,6 +67,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
             logOut()
         }
         profileAdapter.clickCryptoItem = {
+
             findNavController().navigate(
                 ProfileFragmentDirections.actionProfileFragmentToFavoriteCryptoFragment(
                     favoriteCryptoItem = it
@@ -97,20 +99,11 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
         findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
     }
 
-//    private fun getUserInfo() {
-//
-//        FirebaseConnection.db.child(FirebaseConnection.auth.currentUser?.uid!!).addValueEventListener(object :
-//            ValueEventListener {
-//
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//
-//                val userSnapshot = snapshot.getValue(User::class.java)
-//
-////                binding.ivUserProfile.setImage(userSnapshot?.image?: "")
-//
-//            }
-//            override fun onCancelled(error: DatabaseError) {
-//            }
-//        })
-//    }
+    private fun setUpUserInfo(){
+        FirebaseConnection.db.child(FirebaseConnection.auth.currentUser?.uid!!).get().addOnSuccessListener {
+            binding.ivUserProfile.setImage(it.getValue(User::class.java)?.image)
+            binding.tvLastName.text = it.getValue(User::class.java)?.lastName.toString()
+            binding.tvName.text = it.getValue(User::class.java)?.name.toString()
+        }
+    }
 }

@@ -16,32 +16,41 @@ import java.util.*
 class AdminViewModel : ViewModel() {
 
 
-    private var _adminFlow = MutableSharedFlow<List<User>>()
+    private var _adminFlow = MutableSharedFlow<Set<User>>()
     var adminFlow = _adminFlow.asSharedFlow()
 
-    private val userList = mutableListOf<User>()
+    private val userList = mutableSetOf<User>()
 
     fun getAdminData() {
 
-        FirebaseConnection.db.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
+        FirebaseConnection.db.addChildEventListener(object : ChildEventListener {
 
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 if (snapshot.exists()) {
-                    for (userSnapshot in snapshot.children) {
-                        val user = userSnapshot.getValue(User::class.java)
-                        userList.add(user!!)
-                    }
+                    snapshot.getValue(User::class.java)?.let { userList.add(it) }
                 }
                 viewModelScope.launch {
                     _adminFlow.emit(userList)
                 }
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                userList.remove(snapshot.getValue(User::class.java))
+                viewModelScope.launch {
+                    _adminFlow.emit(userList)
+                }
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+            }
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
             }
             override fun onCancelled(error: DatabaseError) {
             }
         })
     }
 
-    fun deleteUser(uid:String) {
+    fun deleteUser(uid: String) {
         viewModelScope.launch {
 
             FirebaseConnection.db.child(uid).removeValue()

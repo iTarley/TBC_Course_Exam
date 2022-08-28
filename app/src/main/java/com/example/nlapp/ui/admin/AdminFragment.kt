@@ -41,11 +41,10 @@ class AdminFragment : BaseFragment<AdminFragmentBinding>(AdminFragmentBinding::i
         viewModel.getAdminData()
         binding.rvAdminRecycler.layoutManager = LinearLayoutManager(context)
         binding.rvAdminRecycler.adapter = adminAdapter
-//        adminAdapter.submitList(emptyList())
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.adminFlow.collect {
-                    adminAdapter.setData(it)
+                    adminAdapter.setData(it.toList())
                 }
             }
         }
@@ -54,7 +53,6 @@ class AdminFragment : BaseFragment<AdminFragmentBinding>(AdminFragmentBinding::i
     private fun listeners() {
         adminAdapter.adminItemClicked = {
             it.uid?.let { it1 -> viewModel.deleteUser(it1) }
-//            setUpRecycler()
         }
     }
 

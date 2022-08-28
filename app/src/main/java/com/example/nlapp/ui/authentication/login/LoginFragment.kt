@@ -10,36 +10,23 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.nlapp.R
 import com.example.nlapp.databinding.FragmentLoginBinding
+import com.example.nlapp.ui.base.BaseFragment
 import com.example.nlapp.utils.Validator.isEmailEmpty
 import com.example.nlapp.utils.Validator.isEmailValid
 import com.example.nlapp.utils.Validator.isPasswordEmpty
 import com.google.firebase.auth.FirebaseAuth
 
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
 
-    private var _binding: FragmentLoginBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
+    override fun start() {
         binding.loginBtn.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCryptoFragment())
         }
 
         listeners()
-
     }
+
 
     private fun listeners() {
         binding.registerBtn.setOnClickListener {
@@ -54,7 +41,7 @@ class LoginFragment : Fragment() {
 
             if (binding.emailEditText.text.toString() == "admin@admin.com" && binding.passwordEditText.text.toString() == "admin123") {
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToAdminFragment())
-            }else{
+            } else {
                 login()
             }
 
@@ -63,6 +50,7 @@ class LoginFragment : Fragment() {
             redirect()
         }
     }
+
 
     private fun login() {
         binding.apply {
@@ -102,7 +90,6 @@ class LoginFragment : Fragment() {
             }
     }
 
-
     private fun navigate() {
         findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCryptoFragment())
     }
@@ -113,8 +100,4 @@ class LoginFragment : Fragment() {
         startActivity(intent)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
