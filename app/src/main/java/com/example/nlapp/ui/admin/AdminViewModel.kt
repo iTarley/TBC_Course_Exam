@@ -52,11 +52,9 @@ class AdminViewModel : ViewModel() {
 
     fun deleteUser(uid: String) {
         viewModelScope.launch {
-
             FirebaseConnection.db.child(uid).removeValue()
             FirebaseConnection.auth.currentUser?.delete()
             _adminFlow.emit(userList)
         }
-
     }
 }

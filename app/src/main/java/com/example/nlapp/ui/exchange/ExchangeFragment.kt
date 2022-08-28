@@ -1,13 +1,9 @@
 package com.example.nlapp.ui.exchange
 
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -16,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.nlapp.R
 import com.example.nlapp.databinding.ExchangeFragmentBinding
 import com.example.nlapp.ui.base.BaseFragment
+import com.example.nlapp.utils.Currencies
 import com.example.nlapp.utils.ResponseHandler
 import kotlinx.coroutines.launch
 
@@ -30,7 +27,7 @@ class ExchangeFragment : BaseFragment<ExchangeFragmentBinding>(ExchangeFragmentB
 
     private fun setUpExchange() {
 
-        val currencyList = listOf("USD", "GEL", "EUR", "GBP")
+        val currencyList = listOf(Currencies.USD.name,Currencies.GEL.name, Currencies.EUR.name, Currencies.GBP.name)
         val adapter = ArrayAdapter(requireContext(), R.layout.list_popup_window_item, currencyList)
         binding.fromCurrency.setAdapter(adapter)
         binding.toCurrency.setAdapter(adapter)
@@ -50,7 +47,6 @@ class ExchangeFragment : BaseFragment<ExchangeFragmentBinding>(ExchangeFragmentB
         })
 
     }
-
 
     private fun currExchange() {
         val amount = binding.amountEditText.text.toString().toLong()

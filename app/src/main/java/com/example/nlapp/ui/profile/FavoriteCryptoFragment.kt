@@ -1,10 +1,6 @@
 package com.example.nlapp.ui.profile
 
 import android.annotation.SuppressLint
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.nlapp.MainActivity
@@ -14,7 +10,6 @@ import com.example.nlapp.extensions.setImage
 import com.example.nlapp.ui.base.BaseFragment
 import com.example.nlapp.utils.FirebaseConnection
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.launch
 
 class FavoriteCryptoFragment :
     BaseFragment<FragmentFavoriteCryptoBinding>(FragmentFavoriteCryptoBinding::inflate) {

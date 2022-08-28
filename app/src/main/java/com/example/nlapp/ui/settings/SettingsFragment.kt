@@ -1,9 +1,7 @@
 package com.example.nlapp.ui.settings
 
-import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.nlapp.MainActivity
 import com.example.nlapp.R
 import com.example.nlapp.databinding.FragmentSettingsBinding
@@ -11,7 +9,6 @@ import com.example.nlapp.ui.base.BaseFragment
 import com.example.nlapp.utils.FirebaseConnection
 import com.example.nlapp.utils.Validator
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
 
@@ -27,7 +24,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         }
 
     }
-
 
 
     private fun infoSetup(){
@@ -78,7 +74,4 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
             }
         }
     }
-
-
-
 }

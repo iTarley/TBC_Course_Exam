@@ -1,11 +1,5 @@
 package com.example.nlapp.ui.authentication.register
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.nlapp.R
@@ -20,7 +14,6 @@ import com.example.nlapp.utils.Validator.isPasswordEmpty
 import com.example.nlapp.utils.Validator.isPasswordMatch
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 

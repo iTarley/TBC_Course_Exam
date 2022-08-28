@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nlapp.databinding.AdminItemBinding
 import com.example.nlapp.extensions.setImage
-import com.example.nlapp.model.CryptoDataItem
 import com.example.nlapp.model.User
 
 class AdminAdapter : ListAdapter<User, AdminAdapter.AdminViewHolder>(CryptoDiffCallBack()) {

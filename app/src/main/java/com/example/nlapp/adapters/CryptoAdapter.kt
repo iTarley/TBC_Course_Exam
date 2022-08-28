@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nlapp.databinding.CryptoItemBinding
 import com.example.nlapp.extensions.setImage
 import com.example.nlapp.model.CryptoDataItem
-import com.example.nlapp.model.CurrencyRate
 
 class CryptoAdapter :
     ListAdapter<CryptoDataItem, CryptoAdapter.CryptoViewHolder>(CryptoDiffCallBack()) {
