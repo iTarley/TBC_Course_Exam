@@ -34,19 +34,24 @@ class AdminAdapter : ListAdapter<User, AdminAdapter.AdminViewHolder>(CryptoDiffC
         holder.onBind()
     }
 
-    override fun getItemCount() = usersList.size
-
     inner class AdminViewHolder(private val binding: AdminItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        private lateinit var currentItem: User
+
         @SuppressLint("SetTextI18n")
         fun onBind() {
+
+            currentItem = getItem(adapterPosition)
+
             binding.apply {
-                tvEmail.text = "${tvEmail.text} : ${usersList[adapterPosition].email}"
-                tvName.text = "${tvName.text} : ${usersList[adapterPosition].name}"
-                tvLastName.text = "${tvLastName.text} : ${usersList[adapterPosition].lastName}"
-                ivUser.setImage(usersList[adapterPosition].image)
+                tvEmail.text = "${tvEmail.text} : ${currentItem.email}"
+                tvName.text = "${tvName.text} : ${currentItem.name}"
+                tvLastName.text = "${tvLastName.text} : ${currentItem.lastName}"
+                ivUser.setImage(currentItem.image)
+
                 root.setOnClickListener {
-                    adminItemClicked?.invoke(getItem(adapterPosition))
+                    adminItemClicked?.invoke(currentItem)
                 }
             }
         }
@@ -55,7 +60,6 @@ class AdminAdapter : ListAdapter<User, AdminAdapter.AdminViewHolder>(CryptoDiffC
     fun setData(data: List<User>) {
         usersList = data
         submitList(usersList)
-
     }
 
     class CryptoDiffCallBack : DiffUtil.ItemCallback<User>() {

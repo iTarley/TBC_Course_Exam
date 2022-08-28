@@ -51,10 +51,13 @@ class LoginFragment : Fragment() {
         }
 
         binding.loginBtn.setOnClickListener {
-            login()
-            if (binding.emailEditText.text.toString() == "admin@admin" && binding.passwordEditText.text.toString() == "admin") {
+
+            if (binding.emailEditText.text.toString() == "admin@admin.com" && binding.passwordEditText.text.toString() == "admin123") {
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToAdminFragment())
+            }else{
+                login()
             }
+
         }
         binding.privacyText.setOnClickListener {
             redirect()

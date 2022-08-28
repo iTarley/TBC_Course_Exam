@@ -110,13 +110,13 @@
         app:layout_constraintTop_toBottomOf="@+id/tvCryptoPriceChange" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnAddToFavorite"
+        android:id="@+id/btnRemoveFromFavorite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/admin_item_background"
-        android:text="Add To Favorites"
+        android:text="Remove From Favorites"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

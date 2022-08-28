@@ -58,6 +58,7 @@ class CryptoFragment : BaseFragment<CryptoFragmentBinding>(CryptoFragmentBinding
                         is ResponseHandler.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
                         }
+                        else -> {}
                     }
                 }
             }
@@ -91,8 +92,9 @@ class CryptoFragment : BaseFragment<CryptoFragmentBinding>(CryptoFragmentBinding
 
     private fun filter(text: String) {
 
-        val filteredCrypto = ArrayList<CryptoDataItem>()
-        cryptoAdapter.setData(filteredCrypto)
+
+        val filteredCrypto = arrayListOf<CryptoDataItem>()
+
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -107,7 +109,9 @@ class CryptoFragment : BaseFragment<CryptoFragmentBinding>(CryptoFragmentBinding
                         }
                         is ResponseHandler.Success -> {
                             it.data?.filterTo(filteredCrypto) { item ->
-                                item.name.lowercase().contains(text.lowercase())
+
+                                item.name?.lowercase()?.contains(text.lowercase()) ?: false
+
                             }
                             binding.progressBar.visibility = View.INVISIBLE
                         }
