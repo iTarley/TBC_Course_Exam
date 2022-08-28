@@ -43,6 +43,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
     }
 
     override fun start() {
+        val activity = requireActivity() as? MainActivity
+        activity?.showNavBar()
         setUpUserInfo()
         setUpRecycler()
         listeners()
@@ -65,6 +67,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
     private fun listeners() {
         binding.logOut.setOnClickListener {
             logOut()
+        }
+
+        binding.settings.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
         }
         profileAdapter.clickCryptoItem = {
 

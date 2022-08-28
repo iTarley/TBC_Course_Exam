@@ -72,7 +72,14 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_profileFragment_to_favoriteCryptoFragment"
-            app:destination="@id/favoriteCryptoFragment" />
+            app:destination="@id/favoriteCryptoFragment"
+            app:enterAnim="@anim/open_anim"
+            app:popEnterAnim="@anim/back_anim" />
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/open_anim"
+            app:popEnterAnim="@anim/back_anim" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -119,4 +126,9 @@
             android:name="favoriteCryptoItem"
             app:argType="com.example.nlapp.model.CryptoDataItem" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.nlapp.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
