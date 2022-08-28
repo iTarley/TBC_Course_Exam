@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.nlapp.R
 import com.example.nlapp.databinding.FragmentLoginBinding
 import com.example.nlapp.ui.base.BaseFragment
+import com.example.nlapp.utils.AdminAuth
 import com.example.nlapp.utils.Validator.isEmailEmpty
 import com.example.nlapp.utils.Validator.isEmailValid
 import com.example.nlapp.utils.Validator.isPasswordEmpty
@@ -21,7 +22,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     override fun start() {
 
-        if(FirebaseAuth.getInstance().currentUser !=null){
+        if (FirebaseAuth.getInstance().currentUser != null) {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCryptoFragment())
         }
 
@@ -44,7 +45,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
         binding.loginBtn.setOnClickListener {
 
-            if (binding.emailEditText.text.toString() == "admin@admin.com" && binding.passwordEditText.text.toString() == "admin123") {
+            if (binding.emailEditText.text.toString() == AdminAuth.ADMIN_EMAIL && binding.passwordEditText.text.toString() == AdminAuth.ADMIN_PASSWORD) {
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToAdminFragment())
             } else {
                 login()

@@ -33,7 +33,6 @@ class FavoriteCryptoFragment :
 
     }
 
-
     private fun listeners() {
         binding.vBack.setOnClickListener {
             findNavController().popBackStack()
