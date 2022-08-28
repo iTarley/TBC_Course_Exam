@@ -58,4 +58,8 @@
     <string name="confirmps">Confirm Password</string>
     <string name="image_url">Image Url</string>
     <string name="psChanged">Password Changed</string>
+    <string name="bitcoin">Bitcoin</string>
+    <string name="btc">BTC</string>
+    <string name="sample_value">20000$</string>
+    <string name="remove_from_favorites">Remove From Favorites</string>
 </resources>

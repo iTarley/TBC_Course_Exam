@@ -22,7 +22,7 @@
         android:id="@+id/tvCryptoName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bitcoin"
+        android:text="@string/bitcoin"
         android:textColor="@color/black"
         android:textSize="38sp"
         app:layout_constraintEnd_toEndOf="parent"
