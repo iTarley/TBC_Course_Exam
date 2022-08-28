@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.nlapp.R
 import com.example.nlapp.databinding.FragmentRegisterBinding
 import com.example.nlapp.model.User
+import com.example.nlapp.ui.base.BaseFragment
+import com.example.nlapp.utils.FirebaseConnection
 import com.example.nlapp.utils.Validator.isEmailEmpty
 import com.example.nlapp.utils.Validator.isEmailValid
 import com.example.nlapp.utils.Validator.isNameEmpty
@@ -20,26 +22,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
-
-    private var _binding: FragmentRegisterBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun start() {
         listeners()
-
     }
+
 
     private fun listeners() {
         binding.backBtn.setOnClickListener {
@@ -122,23 +110,16 @@ class RegisterFragment : Fragment() {
     }
 
     private fun addToDb() {
-        val db = FirebaseDatabase.getInstance().getReference("User")
-        val auth = FirebaseAuth.getInstance()
 
         val name = binding.nameEditText.text.toString()
         val lastName = binding.lastNameEditText.text.toString()
         val email = binding.emailEditText.text.toString()
-        val uid = auth.currentUser?.uid!!
+        val uid = FirebaseConnection.auth.currentUser?.uid!!
         val image = binding.imageEditText.text.toString()
         val userInfo = User(name, lastName, email, uid, image)
-        db.child(auth.currentUser?.uid!!)
+        FirebaseConnection.db.child(FirebaseConnection.auth.currentUser?.uid!!)
             .setValue(userInfo)
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
 }

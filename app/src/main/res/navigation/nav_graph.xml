@@ -113,7 +113,7 @@
     <fragment
         tools:layout="@layout/fragment_favorite_crypto"
         android:id="@+id/favoriteCryptoFragment"
-        android:name="com.example.nlapp.ui.favorite_item.FavoriteCryptoFragment"
+        android:name="com.example.nlapp.ui.profile.FavoriteCryptoFragment"
         android:label="FavoriteCryptoFragment" >
         <argument
             android:name="favoriteCryptoItem"

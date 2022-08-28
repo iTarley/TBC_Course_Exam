@@ -25,7 +25,6 @@ class SplashFragment : Fragment() {
             findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToLoginFragment())
         },1000)
 
-
         return view
     }
 }

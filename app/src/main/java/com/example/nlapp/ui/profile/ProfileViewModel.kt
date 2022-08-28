@@ -16,37 +16,39 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel : ViewModel() {
 
-
-
-
-    private var _cryptoFlow = MutableSharedFlow<List<CryptoDataItem>>()
+    private var _cryptoFlow = MutableSharedFlow<Set<CryptoDataItem>>()
     var cryptoFlow = _cryptoFlow.asSharedFlow()
 
-    private val cryptoList = mutableListOf<CryptoDataItem>()
+    private val cryptoList = mutableSetOf<CryptoDataItem>()
 
     fun getFavoritesData() {
 
         FirebaseConnection.db.child(FirebaseConnection.auth.currentUser?.uid!!).child("Favorite")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
+            .addChildEventListener(object : ChildEventListener {
 
+
+                override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                     if (snapshot.exists()) {
-                        for (cryptoSnapshot in snapshot.children) {
-                            val cryptoItem = cryptoSnapshot.getValue(CryptoDataItem::class.java)
-                            cryptoList.add(cryptoItem!!)
-
+                        snapshot.getValue(CryptoDataItem::class.java)?.let { cryptoList.add(it) }
+                        viewModelScope.launch {
+                            _cryptoFlow.emit(cryptoList)
                         }
                     }
+                }
 
+                override fun onChildRemoved(snapshot: DataSnapshot) {
+                    cryptoList.remove(snapshot.getValue(CryptoDataItem::class.java))
                     viewModelScope.launch {
                         _cryptoFlow.emit(cryptoList)
                     }
-
                 }
 
+                override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                }
+                override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                }
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
     }
-
 }
