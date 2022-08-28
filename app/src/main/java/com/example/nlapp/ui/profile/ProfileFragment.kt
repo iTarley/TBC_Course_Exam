@@ -70,7 +70,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
         }
 
         binding.settings.setOnClickListener {
-            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment(binding.tvName.text.toString(),binding.tvLastName.text.toString()))
         }
         profileAdapter.clickCryptoItem = {
 
