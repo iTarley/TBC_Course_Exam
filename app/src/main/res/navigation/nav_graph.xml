@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.nlapp.ui.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/from_bottom"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.nlapp.ui.authentication.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/open_anim"
+            app:popEnterAnim="@anim/back_anim" />
+        <action
+            android:id="@+id/action_loginFragment_to_recoveryFragment"
+            app:destination="@id/recoveryFragment"
+            app:enterAnim="@anim/open_anim"
+            app:popEnterAnim="@anim/back_anim" />
+        <action
+            android:id="@+id/action_loginFragment_to_cryptoFragment"
+            app:destination="@id/cryptoFragment"
+            app:enterAnim="@anim/open_anim"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_adminFragment"
+            app:destination="@id/adminFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cryptoFragment"
+        android:name="com.example.nlapp.ui.crypto.CryptoFragment"
+        android:label="crypto_fragment"
+        tools:layout="@layout/crypto_fragment" >
+        <action
+            android:id="@+id/action_cryptoFragment_to_cryptoItemFragment"
+            app:destination="@id/cryptoItemFragment"
+            app:enterAnim="@anim/open_anim"
+            app:popEnterAnim="@anim/back_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/exchangeFragment"
+        android:name="com.example.nlapp.ui.exchange.ExchangeFragment"
+        android:label="exchange_fragment"
+        tools:layout="@layout/exchange_fragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.nlapp.ui.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/from_top"
+            app:popEnterAnim="@anim/from_top"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_favoriteCryptoFragment"
+            app:destination="@id/favoriteCryptoFragment"
+            app:enterAnim="@anim/open_anim"
+            app:popEnterAnim="@anim/back_anim" />
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/open_anim"
+            app:popEnterAnim="@anim/back_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.nlapp.ui.authentication.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recoveryFragment"
+        android:name="com.example.nlapp.ui.authentication.passwordRecovery.RecoveryFragment"
+        android:label="fragment_recovery"
+        tools:layout="@layout/fragment_recovery" />
+    <fragment
+        android:id="@+id/cryptoItemFragment"
+        android:name="com.example.nlapp.ui.cryptoitem.CryptoItemFragment"
+        android:label="crypto_item_fragment"
+        tools:layout="@layout/crypto_item_fragment" >
+        <action
+            android:id="@+id/action_cryptoItemFragment_to_cryptoFragment"
+            app:destination="@id/cryptoFragment"
+            app:popUpTo="@id/cryptoFragment" />
+        <argument
+            android:name="cryptoItem"
+            app:argType="com.example.nlapp.model.CryptoDataItem" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="com.example.nlapp.ui.admin.AdminFragment"
+        android:label="admin_fragment"
+        tools:layout="@layout/admin_fragment" >
+        <action
+            android:id="@+id/action_adminFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_favorite_crypto"
+        android:id="@+id/favoriteCryptoFragment"
+        android:name="com.example.nlapp.ui.profile.FavoriteCryptoFragment"
+        android:label="FavoriteCryptoFragment" >
+        <argument
+            android:name="favoriteCryptoItem"
+            app:argType="com.example.nlapp.model.CryptoDataItem" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.nlapp.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+</navigation>
