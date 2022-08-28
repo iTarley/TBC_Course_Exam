@@ -55,8 +55,8 @@
         android:id="@+id/tvCryptoRank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rank: "
         android:layout_marginTop="5dp"
+        android:text="Rank: "
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/tvCryptoPrice"
@@ -66,9 +66,9 @@
         android:id="@+id/tvCryptoHigh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="Today's High: "
         android:textColor="@color/black"
-        android:layout_marginTop="5dp"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/tvCryptoRank"
         app:layout_constraintTop_toBottomOf="@+id/tvCryptoRank" />
@@ -77,8 +77,8 @@
         android:id="@+id/tvCryptoLow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Today's Low: "
         android:layout_marginTop="5dp"
+        android:text="Today's Low: "
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/tvCryptoHigh"
@@ -101,8 +101,8 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvCryptoLastUpdate"
         android:layout_width="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="LastUpdate: "
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -110,9 +110,9 @@
         app:layout_constraintTop_toBottomOf="@+id/tvCryptoPriceChange" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddToFavorite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-android:id="@+id/btnAddToFavorite"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/admin_item_background"

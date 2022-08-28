@@ -10,30 +10,30 @@ import kotlinx.parcelize.Parcelize
 data class CryptoDataItem(
 
     @Json(name = "current_price")
-    val currentPrice: Double,
+    val currentPrice: Double? = 0.0,
 
     @Json(name = "high_24h")
-    val high24h: Double,
+    val high24h: Double? = 0.0,
 
     @Json(name = "image")
-    val image: String,
+    val image: String? = "",
 
     @Json(name = "last_updated")
-    val lastUpdated: String,
+    val lastUpdated: String? = "",
 
     @Json(name = "low_24h")
-    val low24h: Double,
+    val low24h: Double? = 0.0,
 
     @Json(name = "market_cap_rank")
-    val marketCapRank: Int,
+    val marketCapRank: Int? = 0,
 
     @Json(name = "name")
-    val name: String,
+    val name: String? = "",
 
     @Json(name = "price_change_24h")
-    val priceChange24h: Double,
+    val priceChange24h: Double? = 0.0,
 
     @Json(name = "symbol")
-    val symbol: String,
+    val symbol: String? = "",
 
-) : Parcelable
+    ) : Parcelable

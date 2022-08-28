@@ -108,12 +108,11 @@ class CryptoFragment : BaseFragment<CryptoFragmentBinding>(CryptoFragmentBinding
                         }
                         is ResponseHandler.Success -> {
                             it.data?.filterTo(filteredCrypto) { item ->
-                                item.name.lowercase().contains(text.lowercase())
+                                item.name?.lowercase()?.contains(text.lowercase()) ?: false
                             }
                             cryptoAdapter.filterList(filteredCrypto)
                             binding.progressBar.visibility = View.INVISIBLE
                         }
-                        else -> {}
                     }
                 }
             }

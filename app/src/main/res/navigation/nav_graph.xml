@@ -70,6 +70,9 @@
             app:popEnterAnim="@anim/from_top"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_favoriteCryptoFragment"
+            app:destination="@id/favoriteCryptoFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -104,10 +107,16 @@
         android:label="admin_fragment"
         tools:layout="@layout/admin_fragment" >
         <action
-            android:id="@+id/action_adminFragment_to_splashFragment"
-            app:destination="@id/splashFragment" />
-        <action
             android:id="@+id/action_adminFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_favorite_crypto"
+        android:id="@+id/favoriteCryptoFragment"
+        android:name="com.example.nlapp.ui.favorite_item.FavoriteCryptoFragment"
+        android:label="FavoriteCryptoFragment" >
+        <argument
+            android:name="favoriteCryptoItem"
+            app:argType="com.example.nlapp.model.CryptoDataItem" />
     </fragment>
 </navigation>

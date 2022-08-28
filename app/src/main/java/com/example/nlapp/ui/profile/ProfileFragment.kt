@@ -1,38 +1,73 @@
 package com.example.nlapp.ui.profile
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log.d
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nlapp.MainActivity
 import com.example.nlapp.R
+import com.example.nlapp.adapters.CryptoAdapter
 import com.example.nlapp.databinding.ProfileFragmentBinding
+import com.example.nlapp.extensions.setImage
+import com.example.nlapp.model.User
+import com.example.nlapp.ui.base.BaseFragment
+import com.example.nlapp.utils.FirebaseConnection
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBinding::inflate) {
 
-    private var _binding: ProfileFragmentBinding? = null
-    private val binding get() = _binding!!
+    private val viewModel: ProfileViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = ProfileFragmentBinding.inflate(inflater, container, false)
-        return binding.root
+    private val profileAdapter by lazy {
+        CryptoAdapter()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun start() {
+        getUserInfo()
+        setUpRecycler()
         listeners()
+    }
+
+
+    private fun setUpRecycler() {
+        viewModel.getFavoritesData()
+        binding.favoritesRecycler.layoutManager = LinearLayoutManager(context)
+        binding.favoritesRecycler.adapter = profileAdapter
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.cryptoFlow.collect {
+                    profileAdapter.setData(it)
+                    d("list","${it.size}")
+                }
+            }
+        }
     }
 
     private fun listeners() {
         binding.logOut.setOnClickListener {
             logOut()
+        }
+        profileAdapter.clickCryptoItem = {
+            findNavController().navigate(
+                ProfileFragmentDirections.actionProfileFragmentToFavoriteCryptoFragment(
+                    favoriteCryptoItem = it
+                )
+            )
         }
     }
 
@@ -59,9 +94,20 @@ class ProfileFragment : Fragment() {
         findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    private fun getUserInfo() {
 
+        FirebaseConnection.db.child(FirebaseConnection.auth.currentUser?.uid!!).addValueEventListener(object :
+            ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                val userSnapshot = snapshot.getValue(User::class.java)
+
+                binding.ivUserProfile.setImage(userSnapshot?.image)
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
 }

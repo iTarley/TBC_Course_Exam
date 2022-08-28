@@ -4,6 +4,7 @@ import android.util.Log.d
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nlapp.model.User
+import com.example.nlapp.utils.FirebaseConnection
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.coroutines.Dispatchers
@@ -14,11 +15,6 @@ import java.util.*
 
 class AdminViewModel : ViewModel() {
 
-    val db: DatabaseReference =
-        FirebaseDatabase.getInstance().getReference("User")
-
-    val auth: FirebaseAuth = FirebaseAuth.getInstance()
-
 
     private var _adminFlow = MutableSharedFlow<List<User>>()
     var adminFlow = _adminFlow.asSharedFlow()
@@ -27,7 +23,7 @@ class AdminViewModel : ViewModel() {
 
     fun getAdminData() {
 
-        db.addValueEventListener(object : ValueEventListener {
+        FirebaseConnection.db.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 if (snapshot.exists()) {
@@ -48,8 +44,8 @@ class AdminViewModel : ViewModel() {
     fun deleteUser(uid:String) {
         viewModelScope.launch {
 
-            db.child(uid).removeValue()
-            auth.currentUser?.delete()
+            FirebaseConnection.db.child(uid).removeValue()
+            FirebaseConnection.auth.currentUser?.delete()
             _adminFlow.emit(userList)
         }
 

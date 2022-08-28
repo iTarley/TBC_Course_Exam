@@ -7,6 +7,7 @@ import com.example.nlapp.MainActivity
 import com.example.nlapp.databinding.CryptoItemFragmentBinding
 import com.example.nlapp.extensions.setImage
 import com.example.nlapp.ui.base.BaseFragment
+import com.example.nlapp.utils.FirebaseConnection
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -20,7 +21,6 @@ class CryptoItemFragment :
         activity?.hideNavBar()
         setCryptoItemData()
         listeners()
-        addToFavorites()
     }
 
     private fun listeners() {
@@ -29,6 +29,7 @@ class CryptoItemFragment :
         }
         binding.btnAddToFavorite.setOnClickListener {
             addToFavorites()
+            Navigation.findNavController(it).popBackStack()
         }
     }
 
@@ -42,19 +43,17 @@ class CryptoItemFragment :
             tvCryptoHigh.text = "${tvCryptoHigh.text}" + args.cryptoItem.high24h.toString() + "$"
             tvCryptoLow.text = "${tvCryptoLow.text}" + args.cryptoItem.low24h.toString() + "$"
             tvCryptoLastUpdate.text =
-                "${tvCryptoLastUpdate.text}" + args.cryptoItem.lastUpdated.substring(0, 10)
+                "${tvCryptoLastUpdate.text}" + (args.cryptoItem.lastUpdated?.substring(0, 10) ?: "")
             tvCryptoRank.text = "${tvCryptoRank.text}" + args.cryptoItem.marketCapRank.toString()
             tvCryptoPriceChange.text =
-                "${tvCryptoPriceChange.text}" + args.cryptoItem.priceChange24h.toString()
-                    .substring(0, 7) + "$"
+                "${tvCryptoPriceChange.text}" + args.cryptoItem.priceChange24h.toString() + "$"
         }
     }
 
     private fun addToFavorites() {
-        val auth = FirebaseAuth.getInstance()
-        val db = FirebaseDatabase.getInstance().getReference("User")
-
-        db.child(auth.currentUser?.uid!!).child("Favorite").child(args.cryptoItem.name)
-            .setValue(args.cryptoItem)
+        args.cryptoItem.name?.let {
+            FirebaseConnection.db.child(FirebaseConnection.auth.currentUser?.uid!!).child("Favorite").child(it)
+                .setValue(args.cryptoItem)
+        }
     }
 }
