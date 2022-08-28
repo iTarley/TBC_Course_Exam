@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.cryptoitem.CryptoItemFragment">
+
+    <View
+        android:id="@+id/vBack"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/icon_back"
+        android:backgroundTint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCryptoName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bitcoin"
+        android:textColor="@color/black"
+        android:textSize="38sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vBack" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivCryptoImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="15dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintEnd_toEndOf="@+id/tvCryptoName"
+        app:layout_constraintStart_toStartOf="@+id/tvCryptoName"
+        app:layout_constraintTop_toBottomOf="@+id/tvCryptoName" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCryptoPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:text="Current price: "
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivCryptoImage" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCryptoRank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Rank: "
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvCryptoPrice"
+        app:layout_constraintTop_toBottomOf="@+id/tvCryptoPrice" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCryptoHigh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Today's High: "
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvCryptoRank"
+        app:layout_constraintTop_toBottomOf="@+id/tvCryptoRank" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCryptoLow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Today's Low: "
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvCryptoHigh"
+        app:layout_constraintTop_toBottomOf="@+id/tvCryptoHigh" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCryptoPriceChange"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:text="Today's PriceChange: "
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvCryptoLow"
+        app:layout_constraintTop_toBottomOf="@+id/tvCryptoLow" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCryptoLastUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="LastUpdate: "
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvCryptoPriceChange"
+        app:layout_constraintTop_toBottomOf="@+id/tvCryptoPriceChange" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRemoveFromFavorite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/admin_item_background"
+        android:text="Remove From Favorites"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCryptoLastUpdate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
