@@ -1,6 +1,6 @@
 # NL-App
 ## TBC_Midterm_Exam
-Exam # 1
+Exam # 1 (final score 50/100)
 
 
 App logo :
